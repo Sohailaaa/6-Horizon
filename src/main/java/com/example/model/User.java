@@ -15,4 +15,12 @@ public class User {
     private UUID id;
     private String name;
     private List<Order> orders=new ArrayList<>();
+
+    public User(){}
+    public User(UUID id, String name, List<Order> orders) {
+        this.id = id;
+        this.name = name;
+        this.orders = orders;
+    }
+
 }

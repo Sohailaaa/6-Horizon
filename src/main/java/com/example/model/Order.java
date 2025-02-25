@@ -17,13 +17,12 @@ public class Order {
     private double totalPrice;
     private List<Product> products=new ArrayList<>();
 
+    public Order(){}
     public Order(UUID id, UUID userId, double totalPrice, List<Product> products) {
         this.id = id;
         this.userId = userId;
         this.totalPrice = totalPrice;
         this.products = products;
     }
-    public Order(){
 
-    }
 }
