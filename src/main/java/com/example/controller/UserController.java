@@ -27,22 +27,24 @@ public class UserController {
 
     @GetMapping("/")
     public ArrayList<User> getUsers() {
-        return null;
+        return userService.getUsers();
     }
 
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable UUID userId) {
-        return null;
+        return userService.getUserById(userId);
     }
 
     @GetMapping("/{userId}/orders")
     public List<Order> getOrdersByUserId(@PathVariable UUID userId) {
-        return null;
+        return userService.getOrdersByUserId(userId);
     }
 
     @PostMapping("/{userId}/checkout")
     public String addOrderToUser(@PathVariable UUID userId) {
-        return null;
+       userService.addOrderToUser(userId);
+       return "Order added successfully";
+
     }
 
     @PostMapping("/{userId}/removeOrder")
@@ -52,7 +54,10 @@ public class UserController {
 
     @DeleteMapping("/{userId}/emptyCart")
     public String emptyCart(@PathVariable UUID userId) {
-        return null;
+
+            userService.emptyCart(userId);
+            return "Cart emptied successfully";
+
     }
 
     @PutMapping("/addProductToCart")

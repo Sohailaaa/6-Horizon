@@ -1,6 +1,9 @@
 package com.example.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,10 +17,5 @@ import java.util.UUID;
 public class Cart {
     private UUID id;
     private UUID userId;
-    private List<Product> products = new ArrayList<>();
-
-    public Cart(UUID userId, List<Product> products) {
-        this.userId = userId;
-        this.products = products;
-    }
+    private List<Product> products=new ArrayList<>();
 }
