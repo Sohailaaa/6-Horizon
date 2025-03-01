@@ -69,7 +69,7 @@ public class UserRepository extends MainRepository<User> {
     public List<Order> getOrdersByUserId(UUID userId) {
         User user = getUserById(userId);
         if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+            throw new RuntimeException("User not found");
         }
         return user.getOrders();
     }
