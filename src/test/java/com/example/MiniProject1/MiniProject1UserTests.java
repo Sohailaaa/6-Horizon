@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ class MiniProject1UserTests {
     void setUp() {
         userRepository.saveAll(new ArrayList<>()); // Ensure repository starts empty
     }
-
+//TestAddUSer
     @Test
     void testAddUser_NullUser_ShouldThrowException() {
         // Act & Assert
@@ -79,6 +81,8 @@ class MiniProject1UserTests {
         assertEquals("Jane Doe", savedUser.getName());
         assertTrue(userRepository.findAll().contains(savedUser)); // Ensure user is saved
     }
+
+//TestGetUsers
     @Test
     void testGetUsers_NoUsers_ShouldReturnEmptyList() {
         List<User> users = userService.getUsers();
@@ -118,5 +122,47 @@ class MiniProject1UserTests {
             fail("Exception should not be thrown: " + e.getMessage());
         }
     }
+//TestGetUSerByID
+
+    @Test
+    void testGetUserById_ValidId_ShouldReturnUser() {
+        // Arrange: Create and save a user inside this test only
+        UUID userId = UUID.randomUUID();
+        List<Order> orders = List.of(new Order(userId, 50.0, new ArrayList<>()));
+        User testUser = new User(userId,"Alice", orders);
+
+        userService.addUser(testUser);
+
+        // Act
+        User retrievedUser = userService.getUserById(userId);
+
+        // Assert
+        assertNotNull(retrievedUser, "User should not be null for a valid ID");
+        assertEquals(userId, retrievedUser.getId(), "Returned user ID should match the requested ID");
+        assertEquals("Alice", retrievedUser.getName(), "Returned user should be Alice");
+    }
+
+    @Test
+    void testGetUserById_UserNotFound_ShouldThrowRuntimeException() {
+        // Arrange
+        UUID nonExistentUserId = UUID.randomUUID();
+        UserRepository userRepositoryMock = Mockito.mock(UserRepository.class); // ✅ Manually mock repository
+
+        Mockito.when(userRepositoryMock.getUserById(nonExistentUserId)).thenReturn(null);
+
+        // Act & Assert
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> userService.getUserById(nonExistentUserId));
+
+        assertEquals("User not found", exception.getMessage());
+    }
+
+    @Test
+    void testGetUserById_NullUserId_ShouldThrowIllegalArgumentException() {
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class,
+                () -> userService.getUserById(null));
+    }
+
 }
 

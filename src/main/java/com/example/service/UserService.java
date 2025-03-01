@@ -40,9 +40,12 @@ public class UserService extends MainService<User> {
     }
 
     public User getUserById(UUID userId) {
+        if(userId == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
         User user = userRepository.getUserById(userId);
         if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+            throw new RuntimeException( "User not found");
         }
         return user;
 
