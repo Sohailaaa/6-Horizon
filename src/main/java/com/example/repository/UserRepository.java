@@ -28,7 +28,6 @@ public class UserRepository extends MainRepository<User> {
         return User[].class;
     }
     private final OrderRepository orderRepository;
-    @Autowired
     public UserRepository(OrderRepository orderRepository, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
@@ -49,9 +48,18 @@ public class UserRepository extends MainRepository<User> {
     }
 
     public User addUser(User user) {
+        System.out.print("helooo");
+
+
+        ArrayList<User> allUsers = findAll();
+        if (allUsers.contains(user)) {
+            throw new IllegalArgumentException("User already exists");
+        }
+
         save(user);
         return user;
     }
+
 
     public List<Order> getOrdersByUserId(UUID userId) {
         User user = getUserById(userId);
