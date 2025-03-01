@@ -32,11 +32,17 @@ public class ProductRepository extends MainRepository<Product> {
     }
 //nada
     public ArrayList<Product> getProducts() {
-        return null;
+        ArrayList<Product> products = findAll();
+        return products;
     }
 //nada
     public Product getProductById(UUID productId) {
-        return null;
+        Product product = getProducts()
+                .stream()
+                .filter(prod -> prod.getId().equals(productId))
+                .findFirst().orElse(null);
+
+        return product;
     }
 //ganna
     public Product updateProduct(UUID productId, String newName, double newPrice) {
