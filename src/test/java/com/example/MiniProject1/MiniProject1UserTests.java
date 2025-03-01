@@ -165,7 +165,7 @@ class MiniProject1UserTests {
                 () -> userService.getUserById(null));
     }
 
-    //TestAddOrderToUser
+    //TestgetOrderByUserId
 
     @Test
     void testGetOrdersByUserId_UserExistsWithOrders_ShouldReturnOrders() {
