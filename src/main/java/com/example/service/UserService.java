@@ -53,18 +53,20 @@ public class UserService extends MainService<User> {
     public void addOrderToUser(UUID userId) {
         User user = userRepository.getUserById(userId);
         Cart cart = cartRepository.getCartByUserId(userId);
+        if (cart ==null) return;
         List<Product> products = cart.getProducts();
         double totalPrice = 0;
         for (Product product : products) {
             totalPrice += product.getPrice();
 
-            Order order = new Order(1, userId, totalPrice, products);
+            Order order = new Order( userId, totalPrice, products);
              userRepository.addOrderToUser(userId, order);
         }
 
     }
 
     public void emptyCart(UUID userId) {
+         userRepository.emptyCart(userId);
     }
 
     public void removeOrderFromUser(UUID userId, UUID orderId) {

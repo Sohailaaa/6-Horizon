@@ -77,11 +77,20 @@ public class UserRepository extends MainRepository<User> {
 
     public void emptyCart(UUID userId) {
         Cart cart = cartRepository.getCartByUserId(userId);
+        if (cart == null) {
+            return;
+        }
+
         List<Product> products = cart.getProducts();
+        if (products == null) {
+            return; // Nothing to remove
+        }
+
         for (Product product : products) {
             cartRepository.deleteProductFromCart(cart.getId(), product);
         }
     }
+
 
     //nada
     public void removeOrderFromUser(UUID userId, UUID orderId) {

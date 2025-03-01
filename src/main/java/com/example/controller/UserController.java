@@ -54,7 +54,10 @@ public class UserController {
 
     @DeleteMapping("/{userId}/emptyCart")
     public String emptyCart(@PathVariable UUID userId) {
-        return null;
+
+            userService.emptyCart(userId);
+            return "Cart emptied successfully";
+
     }
 
     @PutMapping("/addProductToCart")

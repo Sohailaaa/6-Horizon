@@ -1,6 +1,8 @@
 package com.example.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
