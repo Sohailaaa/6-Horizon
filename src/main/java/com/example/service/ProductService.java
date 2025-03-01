@@ -21,15 +21,23 @@ public class ProductService extends MainService<Product> {
     }
 
     public Product addProduct(Product product) {
+        if(product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
+
         return productRepository.addProduct(product);
     }
 
     public ArrayList<Product> getProducts() {
-        return null;
+        return productRepository.getProducts();
     }
 
     public Product getProductById(UUID productId) {
-        return null;
+        if(productId == null) {
+            throw new IllegalArgumentException("Product Id cannot be null");
+        }
+
+        return productRepository.getProductById(productId);
     }
 
     public Product updateProduct(UUID productId, String newName, double newPrice) {

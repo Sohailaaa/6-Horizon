@@ -6,6 +6,7 @@ import com.example.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -27,16 +28,28 @@ public class ProductRepository extends MainRepository<Product> {
     }
 
     public Product addProduct(Product product) {
+        ArrayList<Product> products = getProducts();
+
+        if(products.contains(product)){
+            throw new IllegalArgumentException("Product already exists");
+        }
+
         save(product);
         return product;
     }
 //nada
     public ArrayList<Product> getProducts() {
-        return null;
+        ArrayList<Product> products = findAll();
+        return products;
     }
 //nada
     public Product getProductById(UUID productId) {
-        return null;
+        Product product = getProducts()
+                .stream()
+                .filter(prod -> prod.getId().equals(productId))
+                .findFirst().orElse(null);
+
+        return product;
     }
 //ganna
     public Product updateProduct(UUID productId, String newName, double newPrice) {

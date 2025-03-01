@@ -51,7 +51,8 @@ public class UserController {
 
     @PostMapping("/{userId}/removeOrder")
     public String removeOrderFromUser(@PathVariable UUID userId, @RequestParam UUID orderId) {
-        return null;
+        userService.removeOrderFromUser(userId, orderId);
+        return "Order removed successfully";
     }
 
     @DeleteMapping("/{userId}/emptyCart")
@@ -74,6 +75,11 @@ public class UserController {
 
     @DeleteMapping("/delete/{userId}")
     public String deleteUserById(@PathVariable UUID userId) {
-        return null;
+        try{
+            userService.deleteUserById(userId);
+            return "User deleted successfully";
+        }catch (Exception e){
+            return "User not found";
+        }
     }
 }

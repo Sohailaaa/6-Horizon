@@ -27,12 +27,12 @@ public class ProductController {
 
     @GetMapping("/")
     public ArrayList<Product> getProducts() {
-        return null;
+        return productService.getProducts();
     }
 
     @GetMapping("/{productId}")
     public Product getProductById(@PathVariable UUID productId) {
-        return null;
+        return productService.getProductById(productId);
     }
 
     @PutMapping("/update/{productId}")
