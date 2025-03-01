@@ -32,11 +32,14 @@ class MiniProject1UserTests {
     @Autowired
     private UserRepository userRepository; // Use actual repository
 
+    @Mock
+    private UserRepository userRepositoryMock;
     @BeforeEach
     void setUp() {
         userRepository.saveAll(new ArrayList<>()); // Ensure repository starts empty
     }
-//TestAddUSer
+
+    //TestAddUSer
     @Test
     void testAddUser_NullUser_ShouldThrowException() {
         // Act & Assert
@@ -82,7 +85,7 @@ class MiniProject1UserTests {
         assertTrue(userRepository.findAll().contains(savedUser)); // Ensure user is saved
     }
 
-//TestGetUsers
+    //TestGetUsers
     @Test
     void testGetUsers_NoUsers_ShouldReturnEmptyList() {
         List<User> users = userService.getUsers();
@@ -129,7 +132,7 @@ class MiniProject1UserTests {
         // Arrange: Create and save a user inside this test only
         UUID userId = UUID.randomUUID();
         List<Order> orders = List.of(new Order(userId, 50.0, new ArrayList<>()));
-        User testUser = new User(userId,"Alice", orders);
+        User testUser = new User(userId, "Alice", orders);
 
         userService.addUser(testUser);
 
@@ -146,8 +149,6 @@ class MiniProject1UserTests {
     void testGetUserById_UserNotFound_ShouldThrowRuntimeException() {
         // Arrange
         UUID nonExistentUserId = UUID.randomUUID();
-        UserRepository userRepositoryMock = Mockito.mock(UserRepository.class); // ✅ Manually mock repository
-
         Mockito.when(userRepositoryMock.getUserById(nonExistentUserId)).thenReturn(null);
 
         // Act & Assert
@@ -164,5 +165,62 @@ class MiniProject1UserTests {
                 () -> userService.getUserById(null));
     }
 
+    //TestAddOrderToUser
+
+    @Test
+    void testGetOrdersByUserId_UserExistsWithOrders_ShouldReturnOrders() {
+        // Arrange
+        UUID userId = UUID.randomUUID();
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(userId, 100.0, new ArrayList<>()));
+
+        User user = new User(userId, "Test User", orders);
+        userService.addUser(user);
+
+        when(userRepositoryMock.getUserById(userId)).thenReturn(user);
+
+        // Act
+        List<Order> actualOrders = userService.getOrdersByUserId(userId);
+
+        // Assert
+        assertNotNull(actualOrders);
+        assertEquals(1, actualOrders.size());
+        assertEquals(100.0, actualOrders.get(0).getTotalPrice());
+    }
+
+    @Test
+    void testGetOrdersByUserId_UserNotFound_ShouldThrowRuntimeException() {
+        UUID nonExistentUserId = UUID.randomUUID();
+        when(userRepositoryMock.getUserById(nonExistentUserId)).thenReturn(null);
+
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> userService.getOrdersByUserId(nonExistentUserId));
+
+        assertEquals("User not found", exception.getMessage());
+    }
+
+    @Test
+    void testGetOrdersByUserId_NullUserId_ShouldThrowIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> userService.getOrdersByUserId(null));
+
+        assertEquals("User cannot be null", exception.getMessage());
+    }
+
+    @Test
+    void testGetOrdersByUserId_UserExistsWithEmptyOrderList_ShouldReturnEmptyList() {
+        UUID userId = UUID.randomUUID();
+        List<Order> emptyOrders = new ArrayList<>();
+        User user = new User(userId, "Test User", emptyOrders);
+        userService.addUser(user);
+
+        when(userRepositoryMock.getUserById(userId)).thenReturn(user);
+        when(userRepositoryMock.getOrdersByUserId(userId)).thenReturn(emptyOrders);
+
+        List<Order> actualOrders = userService.getOrdersByUserId(userId);
+
+        assertNotNull(actualOrders);
+        assertTrue(actualOrders.isEmpty());
+    }
 }
 

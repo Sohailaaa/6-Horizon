@@ -29,7 +29,7 @@ public class UserService extends MainService<User> {
     //The Dependency Injection Variables
 //The Constructor with the requried variables mapping the Dependency Injection.
     public User addUser(User user) {
-        if(user == null) {
+        if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
         return userRepository.addUser(user);
@@ -40,38 +40,41 @@ public class UserService extends MainService<User> {
     }
 
     public User getUserById(UUID userId) {
-        if(userId == null) {
+        if (userId == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
         User user = userRepository.getUserById(userId);
         if (user == null) {
-            throw new RuntimeException( "User not found");
+            throw new RuntimeException("User not found");
         }
         return user;
 
     }
 
     public List<Order> getOrdersByUserId(UUID userId) {
+        if(userId == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
         return userRepository.getOrdersByUserId(userId);
     }
 
     public void addOrderToUser(UUID userId) {
         User user = userRepository.getUserById(userId);
         Cart cart = cartRepository.getCartByUserId(userId);
-        if (cart ==null) return;
+        if (cart == null) return;
         List<Product> products = cart.getProducts();
         double totalPrice = 0;
         for (Product product : products) {
             totalPrice += product.getPrice();
 
-            Order order = new Order( userId, totalPrice, products);
-             userRepository.addOrderToUser(userId, order);
+            Order order = new Order(userId, totalPrice, products);
+            userRepository.addOrderToUser(userId, order);
         }
 
     }
 
     public void emptyCart(UUID userId) {
-         userRepository.emptyCart(userId);
+        userRepository.emptyCart(userId);
     }
 
     public void removeOrderFromUser(UUID userId, UUID orderId) {
