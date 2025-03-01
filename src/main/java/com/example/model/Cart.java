@@ -14,5 +14,10 @@ import java.util.UUID;
 public class Cart {
     private UUID id;
     private UUID userId;
-    private List<Product> products=new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+
+    public Cart(UUID userId, List<Product> products) {
+        this.userId = userId;
+        this.products = products;
+    }
 }
