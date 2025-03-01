@@ -46,12 +46,17 @@ public class UserRepository extends MainRepository<User> {
     }
 //nada
     public void removeOrderFromUser(UUID userId, UUID orderId) {
+        User user = getUserById(userId);
 
+        if (user != null && user.getOrders() != null) {
+            user.getOrders().removeIf(order -> order.getId().equals(orderId));
+            save(user);
+        }
     }
 //nada
     public void deleteUserById(UUID userId) {
-
+        ArrayList<User> users = getUsers();
+        users.removeIf(user -> user.getId().equals(userId));
+        saveAll(users);
     }
-
-
 }
