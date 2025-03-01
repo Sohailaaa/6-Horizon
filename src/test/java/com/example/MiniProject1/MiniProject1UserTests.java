@@ -1,6 +1,8 @@
 package com.example.MiniProject1;
 
+import com.example.model.Order;
 import com.example.model.User;
+import com.example.repository.OrderRepository;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,8 @@ class MiniProject1UserTests {
 
     @Autowired
     private UserRepository userRepository; // Use actual repository
+    @Autowired
+    private OrderRepository orderRepository;
 
     @BeforeEach
     void setUp() {
@@ -75,6 +81,43 @@ class MiniProject1UserTests {
         assertNotNull(savedUser);
         assertEquals("Jane Doe", savedUser.getName());
         assertTrue(userRepository.findAll().contains(savedUser)); // Ensure user is saved
+    }
+
+    @Test
+    void deleteUserById_withValidId_shouldDeleteUser() {
+        // Arrange
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        userRepository.save(user);
+
+        // Act
+        userService.deleteUserById(user.getId());
+
+        // Assert
+        assertFalse(userRepository.getUsers().contains(user), "User should be removed from the list");
+    }
+
+    @Test
+    void deleteUserById_withInvalidId_shouldThrowException() {
+        // Arrange
+        UUID invalidUserId = UUID.randomUUID();
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        userRepository.save(user);
+
+        // Act & Assert
+        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+
+        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
+    }
+
+    @Test
+    void deleteUserById_whenUserListIsEmpty_shouldThrowException() {
+        // Arrange
+        UUID invalidUserId = UUID.randomUUID();
+
+        // Act & Assert
+        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+
+        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
     }
 }
 
