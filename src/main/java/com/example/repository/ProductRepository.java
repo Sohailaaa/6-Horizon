@@ -6,6 +6,7 @@ import com.example.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -27,6 +28,12 @@ public class ProductRepository extends MainRepository<Product> {
     }
 
     public Product addProduct(Product product) {
+        ArrayList<Product> products = getProducts();
+
+        if(products.contains(product)){
+            throw new IllegalArgumentException("Product already exists");
+        }
+
         save(product);
         return product;
     }

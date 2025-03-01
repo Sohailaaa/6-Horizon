@@ -21,6 +21,10 @@ public class ProductService extends MainService<Product> {
     }
 
     public Product addProduct(Product product) {
+        if(product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
+
         return productRepository.addProduct(product);
     }
 
@@ -29,6 +33,10 @@ public class ProductService extends MainService<Product> {
     }
 
     public Product getProductById(UUID productId) {
+        if(productId == null) {
+            throw new IllegalArgumentException("Product Id cannot be null");
+        }
+
         return productRepository.getProductById(productId);
     }
 
