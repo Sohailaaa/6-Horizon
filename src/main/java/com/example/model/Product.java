@@ -1,23 +1,22 @@
 package com.example.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Component
 public class Product {
     private UUID id;
     private String name;
     private double price;
 
-    public Product(UUID id, String name, double price) {
-        this.id = id;
+    public Product(String name, double price) {
+
         this.name = name;
         this.price = price;
     }
-    public Product() {}
 }
