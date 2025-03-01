@@ -21,7 +21,6 @@ public class UserService extends MainService<User> {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
 
-    @Autowired
     public UserService(UserRepository userRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
@@ -30,6 +29,9 @@ public class UserService extends MainService<User> {
     //The Dependency Injection Variables
 //The Constructor with the requried variables mapping the Dependency Injection.
     public User addUser(User user) {
+        if(user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
         return userRepository.addUser(user);
     }
 

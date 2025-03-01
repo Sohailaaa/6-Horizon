@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import com.example.exception.DuplicateUserException;
 import com.example.model.Order;
 import com.example.model.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public User addUser(@RequestBody User user) {
+    public User addUser(@RequestBody User user)  throws DuplicateUserException ,NullPointerException {
         return userService.addUser(user);
     }
 
