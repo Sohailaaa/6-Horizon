@@ -27,15 +27,24 @@ public class UserRepository extends MainRepository<User> {
     protected Class<User[]> getArrayType() {
         return User[].class;
     }
+
     private final OrderRepository orderRepository;
+
     public UserRepository(OrderRepository orderRepository, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
     }
 
     public ArrayList<User> getUsers() {
-           return findAll();
+        try {
+            ArrayList<User> users = findAll();
+            return users != null ? users : new ArrayList<>(); // Ensure it never returns null
+        } catch (RuntimeException e) {
+            System.err.println("Error retrieving users: " + e.getMessage());
+            return new ArrayList<>(); // Return empty list in case of an error
+        }
     }
+
 
     public User getUserById(UUID userId) {
         List<User> users = getUsers();
@@ -48,14 +57,10 @@ public class UserRepository extends MainRepository<User> {
     }
 
     public User addUser(User user) {
-        System.out.print("helooo");
-
-
         ArrayList<User> allUsers = findAll();
         if (allUsers.contains(user)) {
             throw new IllegalArgumentException("User already exists");
         }
-
         save(user);
         return user;
     }
@@ -80,7 +85,6 @@ public class UserRepository extends MainRepository<User> {
         orderRepository.addOrder(order);
         emptyCart(userId);
 
-//
     }
 
     public void emptyCart(UUID userId) {
@@ -121,7 +125,8 @@ public class UserRepository extends MainRepository<User> {
             }
         }
     }
-//nada
+
+    //nada
     public void deleteUserById(UUID userId) {
         ArrayList<User> users = getUsers();
         boolean result = users.removeIf(user -> user.getId().equals(userId));

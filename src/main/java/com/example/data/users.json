@@ -1,1 +1,1 @@
-[{"id":"b5cf5a77-2c6e-4aed-9cdf-92a7d8b88c06","name":"Jane Doe","orders":[]}]
+[{"id":null,"name":"Alice","orders":[{"id":null,"userId":"bc7f91e5-e3f5-4ae0-a9f7-f2f2eac45a14","totalPrice":20.0,"products":[{"id":null,"name":"Product A","price":10.0}]}]},{"id":null,"name":"Bob","orders":[{"id":null,"userId":"cbda9c69-c6ce-44cc-85b1-0e8d11c310c2","totalPrice":30.0,"products":[{"id":null,"name":"Product B","price":15.0}]}]}]
