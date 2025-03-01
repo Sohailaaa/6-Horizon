@@ -96,15 +96,26 @@ public class UserRepository extends MainRepository<User> {
     public void removeOrderFromUser(UUID userId, UUID orderId) {
         User user = getUserById(userId);
 
-        if (user != null && user.getOrders() != null) {
-            user.getOrders().removeIf(order -> order.getId().equals(orderId));
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
+        List<Order> orders = user.getOrders();
+
+        if (orders != null) {
+            orders.removeIf(order -> order.getId().equals(orderId));
             save(user);
         }
     }
 //nada
     public void deleteUserById(UUID userId) {
         ArrayList<User> users = getUsers();
-        users.removeIf(user -> user.getId().equals(userId));
+        boolean result = users.removeIf(user -> user.getId().equals(userId));
+
+        if(!result){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
         saveAll(users);
     }
 }

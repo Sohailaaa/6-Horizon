@@ -25,11 +25,11 @@ public class ProductService extends MainService<Product> {
     }
 
     public ArrayList<Product> getProducts() {
-        return null;
+        return productRepository.getProducts();
     }
 
     public Product getProductById(UUID productId) {
-        return null;
+        return productRepository.getProductById(productId);
     }
 
     public Product updateProduct(UUID productId, String newName, double newPrice) {
