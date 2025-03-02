@@ -5,6 +5,7 @@ import com.example.model.Order;
 import com.example.model.Product;
 import com.example.model.User;
 import com.example.repository.CartRepository;
+import com.example.repository.OrderRepository;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,8 @@ class MiniProject1UserTests {
 
     @Mock
     private UserRepository userRepositoryMock;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Mock
     private CartRepository cartRepositoryMock;
@@ -229,7 +232,43 @@ class MiniProject1UserTests {
         assertNotNull(actualOrders);
         assertTrue(actualOrders.isEmpty());
     }
+//DeleteUSerById
+@Test
+void deleteUserById_withValidId_shouldDeleteUser() {
+    // Arrange
+    User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+    userRepository.save(user);
 
+    // Act
+    userService.deleteUserById(user.getId());
+
+    // Assert
+    assertFalse(userRepository.getUsers().contains(user), "User should be removed from the list");
+}
+
+    @Test
+    void deleteUserById_withInvalidId_shouldThrowException() {
+        // Arrange
+        UUID invalidUserId = UUID.randomUUID();
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        userRepository.save(user);
+
+        // Act & Assert
+        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+
+        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
+    }
+
+    @Test
+    void deleteUserById_whenUserListIsEmpty_shouldThrowException() {
+        // Arrange
+        UUID invalidUserId = UUID.randomUUID();
+
+        // Act & Assert
+        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+
+        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
+    }
     // TestEmptyCart *blocked*
 
 //    @Test
