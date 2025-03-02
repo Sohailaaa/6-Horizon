@@ -1,8 +1,10 @@
 package com.example.MiniProject1;
 
+import com.example.model.Cart;
 import com.example.model.Order;
 import com.example.model.Product;
 import com.example.model.User;
+import com.example.repository.CartRepository;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +37,10 @@ class MiniProject1UserTests {
 
     @Mock
     private UserRepository userRepositoryMock;
+
+    @Mock
+    private CartRepository cartRepositoryMock;
+
     @BeforeEach
     void setUp() {
         userRepository.saveAll(new ArrayList<>()); // Ensure repository starts empty
@@ -222,5 +229,23 @@ class MiniProject1UserTests {
         assertNotNull(actualOrders);
         assertTrue(actualOrders.isEmpty());
     }
-}
 
+    // TestEmptyCart
+
+    @Test
+    void testEmptyCart_CartExistsWithProducts_ShouldRemoveProducts() {
+        UUID userId = UUID.randomUUID();
+        UUID cartId = UUID.randomUUID();
+        List<Product> products = Arrays.asList(new Product("Laptop", 1000), new Product("Phone", 500));
+        Cart cart = new Cart(userId, products);
+
+        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(cart);
+
+        userService.emptyCart(userId);
+
+        for (Product product : products) {
+            verify(cartRepositoryMock).deleteProductFromCart(cartId, product);
+        }
+
+    }
+}
