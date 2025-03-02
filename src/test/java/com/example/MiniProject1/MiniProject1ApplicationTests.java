@@ -343,6 +343,7 @@ class MiniProject1ApplicationTests {
         User testUser11 = new User();
         testUser11.setId(UUID.randomUUID());
         testUser11.setName("Test User11");
+
         Cart cart = new Cart();
         cart.setId(UUID.randomUUID());
         cart.setUserId(testUser11.getId());
@@ -350,7 +351,6 @@ class MiniProject1ApplicationTests {
         cart.setProducts(List.of(tesProduct));
         addCart(cart);
         addUser(testUser11);
-
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user/{userId}/checkout", testUser11.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
