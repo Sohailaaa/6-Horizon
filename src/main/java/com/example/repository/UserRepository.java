@@ -135,7 +135,7 @@ public class UserRepository extends MainRepository<User> {
 
             if (removed) {
                 orderRepository.deleteOrderById(orderId);
-                save(user);
+                override(user);
             } else {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
             }
