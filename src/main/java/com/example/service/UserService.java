@@ -52,24 +52,24 @@ public class UserService extends MainService<User> {
     }
 
     public List<Order> getOrdersByUserId(UUID userId) {
-        if(userId == null) {
+        if (userId == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
         return userRepository.getOrdersByUserId(userId);
     }
 
     public void addOrderToUser(UUID userId) {
-        User user = userRepository.getUserById(userId);
         Cart cart = cartRepository.getCartByUserId(userId);
-        if (cart == null) return;
+        if (cart == null) {
+            return;
+        }
         List<Product> products = cart.getProducts();
         double totalPrice = 0;
         for (Product product : products) {
             totalPrice += product.getPrice();
-
-            Order order = new Order(userId, totalPrice, products);
-            userRepository.addOrderToUser(userId, order);
         }
+        Order order = new Order(userId, totalPrice, products);
+        userRepository.addOrderToUser(userId, order);
 
     }
 

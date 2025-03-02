@@ -34,6 +34,11 @@ public class UserRepository extends MainRepository<User> {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
     }
+    public void override(User user){
+        ArrayList<User> currentUser = new ArrayList<>();
+        currentUser.add(user);
+        overrideData(currentUser);
+    }
 
     public ArrayList<User> getUsers() {
         try {
@@ -62,6 +67,10 @@ public class UserRepository extends MainRepository<User> {
             throw new IllegalArgumentException("User already exists");
         }
         save(user);
+        for(User userr:getUsers()){
+            System.out.print("saved user"+userr);
+
+        }
         return user;
     }
 
@@ -80,10 +89,17 @@ public class UserRepository extends MainRepository<User> {
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
+        if (user.getOrders() == null) {
+            user.setOrders(new ArrayList<>());
+        }
+        System.out.println(" order"+order);
         user.getOrders().add(order);
-        save(user);
         orderRepository.addOrder(order);
+
         emptyCart(userId);
+       // save(user);
+        override(user);
+        System.out.println("saved order"+getOrdersByUserId(userId).size());
 
     }
 

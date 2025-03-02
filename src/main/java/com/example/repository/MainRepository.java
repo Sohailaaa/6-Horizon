@@ -15,13 +15,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public abstract class MainRepository<T> {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
-    
+
     protected abstract String getDataPath();
+
     protected abstract Class<T[]> getArrayType();
 
-    public MainRepository(){
+    public MainRepository() {
 
     }
+
     public ArrayList<T> findAll() {
         try {
             File file = new File(getDataPath());
@@ -44,19 +46,16 @@ public abstract class MainRepository<T> {
         }
     }
 
-    public void save(T data){
+    public void save(T data) {
         ArrayList<T> allData = findAll();
         allData.add(data);
         saveAll(allData);
     }
 
 
-
     public void overrideData(ArrayList<T> data) {
         saveAll(data);
     }
-
-    
 
 
 }

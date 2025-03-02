@@ -32,7 +32,7 @@ public class CartRepository extends MainRepository<Cart> {
     }
 //ganna
     public ArrayList<Cart> getCarts() {
-        return null;
+        return findAll();
     }
 //john
     public Cart getCartById(UUID cartId) {
