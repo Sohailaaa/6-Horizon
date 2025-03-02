@@ -232,19 +232,19 @@ class MiniProject1UserTests {
         assertNotNull(actualOrders);
         assertTrue(actualOrders.isEmpty());
     }
-//DeleteUSerById
-@Test
-void deleteUserById_withValidId_shouldDeleteUser() {
-    // Arrange
-    User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
-    userRepository.save(user);
+    //DeleteUSerById
+    @Test
+    void deleteUserById_withValidId_shouldDeleteUser() {
+        // Arrange
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        userRepository.save(user);
 
-    // Act
-    userService.deleteUserById(user.getId());
+        // Act
+        userService.deleteUserById(user.getId());
 
-    // Assert
-    assertFalse(userRepository.getUsers().contains(user), "User should be removed from the list");
-}
+        // Assert
+        assertFalse(userRepository.getUsers().contains(user), "User should be removed from the list");
+    }
 
     @Test
     void deleteUserById_withInvalidId_shouldThrowException() {
