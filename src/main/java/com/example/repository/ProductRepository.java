@@ -3,7 +3,9 @@ package com.example.repository;
 import com.example.model.Cart;
 import com.example.model.Product;
 import com.example.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,17 +53,51 @@ public class ProductRepository extends MainRepository<Product> {
 
         return product;
     }
+
 //ganna
     public Product updateProduct(UUID productId, String newName, double newPrice) {
-        return null;
+        ArrayList<Product> products = getProducts();
+        boolean result = products.stream().anyMatch(product -> product.getId().equals(productId));
+
+        if (!result) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        }
+        products.forEach(product -> {
+            if (product.getId().equals(productId)) {
+                product.setName(newName);
+                product.setPrice(newPrice);
+            }
+        });
+        saveAll(products);
+        return getProductById(productId);
     }
+
     //ganna
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
+        if (discount < 0 || discount > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid discount value. Must be between 0 and 100.");
+        }
 
+        ArrayList<Product> products = getProducts();
+        for (Product product : products) {
+            if (productIds.contains(product.getId())) {
+                double newPrice = product.getPrice() * (1 - discount / 100); // Apply the discount
+                product.setPrice(newPrice);
+            }
+        }
+        saveAll(products);
     }
+
     //ganna
     public void deleteProductById(UUID productId) {
+        ArrayList<Product> products = getProducts();
+        boolean result = products.removeIf(product -> product.getId().equals(productId));
 
+        if (!result) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+        }
+
+        saveAll(products);
     }
 
 }
