@@ -20,7 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -232,6 +231,55 @@ class MiniProject1UserTests {
         assertNotNull(actualOrders);
         assertTrue(actualOrders.isEmpty());
     }
+
+    //RemoveOrderFromUser
+    @Test
+    void removeOrderFromUser_withValidUserAndSingleOrder_ShouldRemoveOrderSuccessfully() {
+        //Arrange
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        Order order = new Order(UUID.randomUUID(), user.getId(), 100.0, new ArrayList<>());
+        userRepository.addUser(user);
+        userRepository.addOrderToUser(user.getId(), order);
+
+        //Act
+        userService.removeOrderFromUser(user.getId(), order.getId());
+
+        //Assert
+        assertTrue(userRepository.getOrdersByUserId(user.getId()).isEmpty());
+    }
+
+    @Test
+    void removeOrderFromUser_withInvalidOrder_ShouldThrowException() {
+        // Arrange
+        User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        Order order = new Order(UUID.randomUUID(), user.getId(), 100.0, new ArrayList<>());
+        userRepository.addUser(user);
+        userRepository.addOrderToUser(user.getId(), order);
+        UUID invalidOrderId = UUID.randomUUID();
+
+        // Act & Assert
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+            userService.removeOrderFromUser(user.getId(), invalidOrderId);
+        });
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        assertEquals("Order not found", exception.getReason());
+    }
+
+    @Test
+    void removeOrderFromUser_withInvalidUser_shouldThrowException() {
+        // Arrange
+        UUID userId = UUID.randomUUID();
+
+        // Act & Assert
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+            userService.removeOrderFromUser(userId, UUID.randomUUID());
+        });
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        assertEquals("User not found", exception.getReason());
+    }
+
     //DeleteUSerById
     @Test
     void deleteUserById_withValidId_shouldDeleteUser() {
@@ -254,9 +302,10 @@ class MiniProject1UserTests {
         userRepository.save(user);
 
         // Act & Assert
-        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
 
-        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        assertEquals("User not found", exception.getReason());
     }
 
     @Test
@@ -265,10 +314,12 @@ class MiniProject1UserTests {
         UUID invalidUserId = UUID.randomUUID();
 
         // Act & Assert
-        Exception exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> userService.deleteUserById(invalidUserId));
 
-        assertEquals("404 NOT_FOUND \"User not found\"", exception.getMessage(), "Exception reason should match expected message");
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        assertEquals("User not found", exception.getReason());
     }
+
     // TestEmptyCart *blocked*
 
 //    @Test
