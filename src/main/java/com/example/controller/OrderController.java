@@ -27,16 +27,22 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public Order getOrderById(@PathVariable UUID orderId) {
-        return null;
+        return orderService.getOrderById(orderId);
     }
 
     @GetMapping("/")
     public ArrayList<Order> getOrders() {
-        return null;
+        return orderService.getOrders();
     }
 
     @DeleteMapping("/delete/{orderId}")
     public String deleteOrderById(@PathVariable UUID orderId) {
-        return null;
+        try {
+            orderService.deleteOrderById(orderId);
+        }
+        catch (Exception e) {
+            return "Order not found";
+        }
+        return "Order deleted successfully";
     }
 }

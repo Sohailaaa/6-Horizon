@@ -25,13 +25,19 @@ public class OrderService extends MainService<Order> {
     }
 
     public ArrayList<Order> getOrders() {
-        return null;
+        return orderRepository.getOrders();
     }
 
     public Order getOrderById(UUID orderId) {
-        return null;
+        return orderRepository.getOrderById(orderId)   ;
     }
 
     public void deleteOrderById(UUID orderId) throws IllegalArgumentException {
+        Order order = orderRepository.getOrderById(orderId);
+        if(order == null){
+            throw new IllegalArgumentException("Order not found");
+        }else {
+            orderRepository.deleteOrderById(orderId);
+        }
     }
 }
