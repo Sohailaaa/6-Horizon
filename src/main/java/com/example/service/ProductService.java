@@ -43,16 +43,18 @@ public class ProductService extends MainService<Product> {
     }
 
     public Product updateProduct(UUID productId, String newName, double newPrice) {
-        if (productId == null || newName == null || newName.isEmpty() || newPrice < 0) {
-            throw new IllegalArgumentException("Invalid product update parameters");
-        }
+        ArrayList<Product> products = getProducts();
 
-        Product existingProduct = productRepository.getProductById(productId);
-        if (existingProduct == null) {
-            throw new IllegalArgumentException("Product not found");
-        }
+        Product productToUpdate = products.stream()
+                .filter(product -> product.getId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-        return productRepository.addProduct(existingProduct);
+        productToUpdate.setName(newName);
+        productToUpdate.setPrice(newPrice);
+
+        productRepository.saveAll(products);
+        return productToUpdate;
     }
 
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
