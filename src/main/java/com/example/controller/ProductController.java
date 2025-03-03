@@ -3,7 +3,9 @@ package com.example.controller;
 import com.example.model.Product;
 import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -37,16 +39,42 @@ public class ProductController {
 
     @PutMapping("/update/{productId}")
     public Product updateProduct(@PathVariable UUID productId, @RequestBody Map<String, Object> body) {
-        return null;
+        if (!body.containsKey("name") || !body.containsKey("price")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing fields: name/price");
+        }
+        String newName = body.get("name").toString();
+        double newPrice;
+        try {
+            newPrice = Double.parseDouble(body.get("price").toString());
+        } catch (NumberFormatException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid price value");
+        }
+        return productService.updateProduct(productId, newName, newPrice);
     }
 
     @PutMapping("/applyDiscount")
     public String applyDiscount(@RequestParam double discount, @RequestBody ArrayList<UUID> productIds) {
-        return null;
+        if (discount < 0 || discount > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Discount must be between 0 and 100");
+        }
+
+        if (productIds == null || productIds.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product list cannot be empty");
+        }
+
+        productService.applyDiscount(discount, productIds);
+        return "Discount applied successfully";
     }
+
 
     @DeleteMapping("/delete/{productId}")
     public String deleteProductById(@PathVariable UUID productId) {
-        return null;
+        try{
+            productService.deleteProductById(productId);
+            return "Product deleted successfully";
+        }catch (Exception e){
+            return "Product not found";
+        }
+
     }
 }
