@@ -22,6 +22,9 @@ public class CartService extends MainService<Cart> {
     }
 
     public Cart addCart(Cart cart) {
+        if (cart == null) {
+            throw new NullPointerException();
+        }
         return cartRepository.addCart(cart);
     }
 

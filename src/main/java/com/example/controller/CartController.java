@@ -35,7 +35,7 @@ public class CartController {
     @PutMapping("/addProduct/{cartId}")
     public String addProductToCart(@PathVariable UUID cartId, @RequestBody Product product) {
         cartService.addProductToCart(cartId, product);
-        return "Product added to the cart successfully";
+        return "Product added to cart";
     }
 
     @DeleteMapping("/delete/{cartId}")
