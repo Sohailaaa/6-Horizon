@@ -20,6 +20,7 @@ public class Cart {
     private List<Product> products=new ArrayList<>();
 
     public Cart(UUID userId, List<Product> products) {
+        this.id = UUID.randomUUID();
         this.userId = userId;
         this.products = products;
     }
