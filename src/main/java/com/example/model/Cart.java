@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Component
 public class Cart {
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private UUID userId;
     private List<Product> products=new ArrayList<>();
 

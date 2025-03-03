@@ -1,8 +1,12 @@
 package com.example.controller;
 
 import com.example.exception.DuplicateUserException;
+import com.example.model.Cart;
 import com.example.model.Order;
+import com.example.model.Product;
 import com.example.model.User;
+import com.example.service.CartService;
+import com.example.service.ProductService;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +21,14 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final ProductService productService;
+    private final CartService cartService;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ProductService productService, CartService cartService) {
         this.userService = userService;
+        this.productService = productService;
+        this.cartService = cartService;
     }
 
     @PostMapping("/")
@@ -65,12 +74,20 @@ public class UserController {
 
     @PutMapping("/addProductToCart")
     public String addProductToCart(@RequestParam UUID userId, @RequestParam UUID productId) {
-        return null;
+        Product product = productService.getProductById(productId);
+        Cart cart = cartService.getCartByUserId(userId);
+        UUID cartId = cart.getId();
+        cartService.addProductToCart(cartId, product);
+        return "Product added to cart";
     }
 
     @PutMapping("/deleteProductFromCart")
     public String deleteProductFromCart(@RequestParam UUID userId, @RequestParam UUID productId) {
-        return null;
+        Product product = productService.getProductById(productId);
+        Cart cart = cartService.getCartByUserId(userId);
+        UUID cartId = cart.getId();
+        cartService.deleteProductFromCart(cartId, product);
+        return "Product deleted from cart";
     }
 
     @DeleteMapping("/delete/{userId}")

@@ -20,10 +20,12 @@ import java.util.UUID;
 public class UserService extends MainService<User> {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
+    private final CartService cartService;
 
-    public UserService(UserRepository userRepository, CartRepository cartRepository) {
+    public UserService(UserRepository userRepository, CartRepository cartRepository, CartService cartService) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
+        this.cartService = cartService;
     }
 
     //The Dependency Injection Variables
@@ -32,6 +34,7 @@ public class UserService extends MainService<User> {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
+        cartService.addCart(new Cart(user.getId(), new ArrayList<Product>()));
         return userRepository.addUser(user);
     }
 

@@ -59,12 +59,21 @@ public class CartRepository extends MainRepository<Cart> {
 
     // Add Product to Cart
     public void addProductToCart(UUID cartId, Product product) {
-        Cart cart = getCartById(cartId);
-        if (cart.getProducts() == null) {
-            cart.setProducts(new ArrayList<>());
+        ArrayList<Cart> carts = getCarts();
+        Cart updated = null;
+        for (Cart cart : carts) {
+            if (cart.getId().equals(cartId)) {
+                updated = cart;
+                break;
+            }
         }
-        cart.getProducts().add(product);
-        save(cart);
+        if (updated == null) {
+            throw new RuntimeException("Cart not found");
+        }
+        carts.remove(updated);
+        updated.getProducts().add(product);
+        carts.add(updated);
+        saveAll(carts);
     }
 
     // Delete Product from Cart

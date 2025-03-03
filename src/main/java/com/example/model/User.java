@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Component
 public class User {
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String name;
     private List<Order> orders=new ArrayList<>();
 
