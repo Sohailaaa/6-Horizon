@@ -10,10 +10,12 @@ import java.util.UUID;
 @Repository
 @SuppressWarnings("rawtypes")
 public class OrderRepository extends MainRepository<Order> {
+
+    private static final String FILE_PATH = "src/main/java/com/example/data/orders.json";
+
     @Override
     protected String getDataPath() {
-        return "src/main/java/com/example/data/orders.json";
-
+        return FILE_PATH;
     }
 
     @Override
@@ -21,24 +23,26 @@ public class OrderRepository extends MainRepository<Order> {
         return Order[].class;
     }
 
-    public OrderRepository() {
-    }
-
     public void addOrder(Order order) {
         save(order);
-
     }
-//amory
+
     public ArrayList<Order> getOrders() {
-        return null;
+        return findAll();
     }
-//amory
+
     public Order getOrderById(UUID orderId) {
-        return null;
+        return findAll().stream()
+                .filter(order -> order.getId().equals(orderId))
+                .findFirst()
+                .orElse(null);
     }
-//amory
+
     public void deleteOrderById(UUID orderId) {
-
+        ArrayList<Order> orders = findAll();
+        boolean removed = orders.removeIf(order -> order.getId().equals(orderId));
+        if (removed) {
+            overrideData(orders);
+        }
     }
-
 }

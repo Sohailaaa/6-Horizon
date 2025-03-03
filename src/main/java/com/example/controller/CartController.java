@@ -27,22 +27,20 @@ public class CartController {
     }
 
     @GetMapping("/")
-    public ArrayList<Cart> getCarts() {
-        return null;
-    }
+    public ArrayList<Cart> getCarts() { return cartService.getCarts(); }
 
     @GetMapping("/{cartId}")
-    public Cart getCartById(@PathVariable UUID cartId) {
-        return null;
-    }
+    public Cart getCartById(@PathVariable UUID cartId) { return cartService.getCartById(cartId); }
 
     @PutMapping("/addProduct/{cartId}")
     public String addProductToCart(@PathVariable UUID cartId, @RequestBody Product product) {
-        return null;
+        cartService.addProductToCart(cartId, product);
+        return "Product added to cart";
     }
 
     @DeleteMapping("/delete/{cartId}")
     public String deleteCartById(@PathVariable UUID cartId) {
-        return null;
+        cartService.deleteCartById(cartId);
+        return "Cart deleted successfully";
     }
 }
