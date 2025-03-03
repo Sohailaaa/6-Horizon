@@ -39,16 +39,19 @@ public class ProductController {
 
     @PutMapping("/update/{productId}")
     public Product updateProduct(@PathVariable UUID productId, @RequestBody Map<String, Object> body) {
-        if (!body.containsKey("name") || !body.containsKey("price")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing fields: name/price");
+        if (!body.containsKey("newName") || !body.containsKey("newPrice")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing fields: newName/newPrice");
         }
-        String newName = body.get("name").toString();
+
+        String newName = (String) body.get("newName");
         double newPrice;
+
         try {
-            newPrice = Double.parseDouble(body.get("price").toString());
-        } catch (NumberFormatException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid price value");
+            newPrice = ((Number) body.get("newPrice")).doubleValue();
+        } catch (ClassCastException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid price format");
         }
+
         return productService.updateProduct(productId, newName, newPrice);
     }
 
