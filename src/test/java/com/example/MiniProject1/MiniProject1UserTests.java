@@ -47,6 +47,8 @@ class MiniProject1UserTests {
     private CartRepository cartRepositoryMock;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private CartRepository cartRepository;
 
     @BeforeEach
     void setUp() {
@@ -243,7 +245,9 @@ class MiniProject1UserTests {
         //Arrange
         User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
         Order order = new Order(UUID.randomUUID(), user.getId(), 100.0, new ArrayList<>());
+        Cart cart = new Cart(user.getId(), new ArrayList<>());
         userRepository.addUser(user);
+        cartRepository.addCart(cart);
         userRepository.addOrderToUser(user.getId(), order);
 
         //Act
@@ -257,8 +261,10 @@ class MiniProject1UserTests {
     void removeOrderFromUser_withInvalidOrder_ShouldThrowException() {
         // Arrange
         User user = new User(UUID.randomUUID(), "TestUser", new ArrayList<>());
+        Cart cart = new Cart(user.getId(), new ArrayList<>());
         Order order = new Order(UUID.randomUUID(), user.getId(), 100.0, new ArrayList<>());
         userRepository.addUser(user);
+        cartRepository.addCart(cart);
         userRepository.addOrderToUser(user.getId(), order);
         UUID invalidOrderId = UUID.randomUUID();
 
