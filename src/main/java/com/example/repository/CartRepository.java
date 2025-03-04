@@ -2,6 +2,7 @@ package com.example.repository;
 
 import com.example.model.Cart;
 import com.example.model.Product;
+import com.example.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,7 +29,11 @@ public class CartRepository extends MainRepository<Cart> {
         save(cart);
         return cart;
     }
-
+    public void override(Cart cart){
+        ArrayList<Cart> currentCart = new ArrayList<>();
+        currentCart.add(cart);
+        overrideData(currentCart);
+    }
     // Get All Carts
     public ArrayList<Cart> getCarts() {
         ArrayList<Cart> carts = findAll();
@@ -59,16 +64,18 @@ public class CartRepository extends MainRepository<Cart> {
 
     // Add Product to Cart
     public void addProductToCart(UUID cartId, Product product) {
+        System.out.println("addProductToCart");
         Cart cart = getCartById(cartId);
         if (cart.getProducts() == null) {
             cart.setProducts(new ArrayList<>());
         }
         cart.getProducts().add(product);
-        save(cart);
+        override(cart);
     }
 
     // Delete Product from Cart
     public void deleteProductFromCart(UUID cartId, Product product) {
+        System.out.println("tooo");
         Cart cart = getCartById(cartId);
         List<Product> products = cart.getProducts();
 
@@ -78,8 +85,8 @@ public class CartRepository extends MainRepository<Cart> {
 
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getId().equals(product.getId())) {
-                products.remove(i);
-                save(cart);
+                cart.getProducts().remove(i);
+                override(cart);
                 return;
             }
         }

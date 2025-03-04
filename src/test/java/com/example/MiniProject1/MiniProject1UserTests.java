@@ -7,7 +7,9 @@ import com.example.model.User;
 import com.example.repository.CartRepository;
 import com.example.repository.OrderRepository;
 import com.example.repository.UserRepository;
+import com.example.service.CartService;
 import com.example.service.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +45,8 @@ class MiniProject1UserTests {
 
     @Mock
     private CartRepository cartRepositoryMock;
+    @Autowired
+    private CartService cartService;
 
     @BeforeEach
     void setUp() {
@@ -320,47 +325,61 @@ class MiniProject1UserTests {
         assertEquals("User not found", exception.getReason());
     }
 
-    // TestEmptyCart *blocked*
+    // TestEmptyCart
 
-//    @Test
-//    void testEmptyCart_CartExistsWithProducts_ShouldRemoveProducts() {
-//        UUID userId = UUID.randomUUID();
-//        UUID cartId = UUID.randomUUID();
-//        List<Product> products = Arrays.asList(new Product("Laptop", 1000), new Product("Phone", 500));
-//        Cart cart = new Cart(userId, products);
-//
-//        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(cart);
-//
-//        userService.emptyCart(userId);
-//
-//        for (Product product : products) {
-//            verify(cartRepositoryMock).deleteProductFromCart(cartId, product);
-//        }
-//
-//    }
-//
-//    @Test
-//    void testEmptyCart_CartExistsWithNoProducts_ShouldDoNothing() {
-//        UUID userId = UUID.randomUUID();
-//        Cart cart = new Cart(userId, new ArrayList<>());
-//
-//        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(cart);
-//
-//        userService.emptyCart(userId);
-//
-//        verify(cartRepositoryMock, never()).deleteProductFromCart(any(), any());
-//    }
-//
-//    @Test
-//    void testEmptyCart_CartDoesNotExist_ShouldDoNothing() {
-//        UUID userId = UUID.randomUUID();
-//
-//        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(null);
-//
-//        userService.emptyCart(userId);
-//
-//        verify(cartRepositoryMock, never()).deleteProductFromCart(any(), any());
-//    }
-    // TestOrderToUser "blocked"
+    @Test
+    void testEmptyCart_CartExistsWithProducts_ShouldRemoveProducts() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "TestUser", new ArrayList<>());
+        List<Product> products = new ArrayList<>(Arrays.asList(
+                new Product("Laptop", 1000),
+                new Product("Phone", 500)
+        ));
+        Cart cart = new Cart(userId, products);
+        userRepository.addUser(user);
+
+
+        cartService.addCart(cart);  // Ensure cartService is used properly
+
+        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(cart);
+        userService.emptyCart(userId);
+        // ✅ Correct assertion: Check if the cart is empty after calling emptyCart
+        assertTrue(cartService.getCartByUserId(userId).getProducts().isEmpty());
+    }
+
+
+
+    @Test
+    void testEmptyCart_CartExistsWithNoProducts_ShouldDoNothing() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "TestUser", new ArrayList<>());
+        Cart cart = new Cart(userId, new ArrayList<>());
+        userRepository.addUser(user);
+        cartService.addCart(cart);
+        when(cartRepositoryMock.getCartByUserId(userId)).thenReturn(cart);
+
+        userService.emptyCart(userId);
+
+        verify(cartRepositoryMock, never()).deleteProductFromCart(any(), any());
+    }
+
+    @Test
+    void testEmptyCart_CartDoesNotExist_ShouldThrowNotFound() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "TestUser", new ArrayList<>());
+        userRepository.addUser(user);
+
+        when(cartRepositoryMock.getCartByUserId(userId)).thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart not found"));
+
+        ResponseStatusException exception = Assertions.assertThrows(ResponseStatusException.class, () -> {
+            userService.emptyCart(userId);
+        });
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        assertEquals("Cart not found", exception.getReason());
+
+        verify(cartRepositoryMock, never()).deleteProductFromCart(any(), any());
+    }
+    // TestOrderToUser
 
 }

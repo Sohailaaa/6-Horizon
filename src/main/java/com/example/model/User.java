@@ -16,6 +16,7 @@ public class User {
     private List<Order> orders=new ArrayList<>();
 
     public User(String name , List<Order> orders) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.orders = orders;
     }

@@ -104,17 +104,22 @@ public class UserRepository extends MainRepository<User> {
     }
 
     public void emptyCart(UUID userId) {
+        System.out.println("doool");
+
         Cart cart = cartRepository.getCartByUserId(userId);
-        if (cart == null) {
+        if (cart == null ) {
+            System.out.println("cart is null");
             return;
         }
 
         List<Product> products = cart.getProducts();
-        if (products == null) {
+        if (products == null || products.isEmpty()) {
+            System.out.println("cart is Empty");
             return; // Nothing to remove
         }
 
         for (Product product : products) {
+
             cartRepository.deleteProductFromCart(cart.getId(), product);
         }
     }

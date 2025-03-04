@@ -439,7 +439,7 @@ class MiniProject1ApplicationTests {
         Product testProduct = new Product(UUID.randomUUID(), "Test Product", 10.0);
         addUser(testUser15);
         addProduct(testProduct);
-        Cart cart = new Cart(UUID.randomUUID(), testUser15.getId(), new ArrayList<>(List.of(testProduct)));
+        Cart cart = new Cart(UUID.randomUUID(), UUID.randomUUID(), new ArrayList<>(List.of(testProduct)));
         addCart(cart);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/user/deleteProductFromCart")
