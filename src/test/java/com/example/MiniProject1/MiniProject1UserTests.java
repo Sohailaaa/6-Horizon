@@ -40,8 +40,8 @@ class MiniProject1UserTests {
 
     @Mock
     private UserRepository userRepositoryMock;
-    @Autowired
-    private OrderRepository orderRepository;
+    @Mock
+    private OrderRepository orderRepositoryMock;
 
     @Mock
     private CartRepository cartRepositoryMock;
@@ -348,7 +348,6 @@ class MiniProject1UserTests {
     }
 
 
-
     @Test
     void testEmptyCart_CartExistsWithNoProducts_ShouldDoNothing() {
         UUID userId = UUID.randomUUID();
@@ -380,6 +379,50 @@ class MiniProject1UserTests {
 
         verify(cartRepositoryMock, never()).deleteProductFromCart(any(), any());
     }
+    
     // TestOrderToUser
+
+
+    @Test
+    void testAddOrderToUser_UserNotFound() {
+        UUID userId = UUID.randomUUID();
+
+        when(userRepositoryMock.getUserById(userId)).thenReturn(null);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            userService.addOrderToUser(userId);
+        });
+
+        assertEquals("User not found", exception.getMessage());
+    }
+
+    @Test
+    void testAddOrderToUser_CartEmpty() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "Test User", new ArrayList<>());
+        Cart cart = new Cart(userId, new ArrayList<Product>());
+        userRepository.addUser(user);
+        cartService.addCart(cart);
+        userService.addOrderToUser(userId);
+
+        assertEquals(userRepository.getOrdersByUserId(userId).size(), 0);
+
+    }
+
+    @Test
+    void testAddOrderToUser_Success() {
+
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "Test User", new ArrayList<>());
+        Product product = new Product("Test Product", 10.0);
+        Cart cart = new Cart(userId, new ArrayList<>(Arrays.asList(product)));
+        userRepository.addUser(user);
+        cartService.addCart(cart);
+        userService.addOrderToUser(userId);
+
+        assertEquals(userRepository.getOrdersByUserId(userId).size(), 1);
+
+    }
+
 
 }

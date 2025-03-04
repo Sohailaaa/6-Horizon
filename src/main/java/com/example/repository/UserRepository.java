@@ -86,9 +86,8 @@ public class UserRepository extends MainRepository<User> {
 
     public void addOrderToUser(UUID userId, Order order) {
         User user = getUserById(userId);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
+
+
         if (user.getOrders() == null) {
             user.setOrders(new ArrayList<>());
         }
@@ -97,7 +96,6 @@ public class UserRepository extends MainRepository<User> {
         orderRepository.addOrder(order);
 
         emptyCart(userId);
-       // save(user);
         override(user);
         System.out.println("saved order"+getOrdersByUserId(userId).size());
 
