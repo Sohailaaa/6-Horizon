@@ -77,6 +77,7 @@ public class CartRepository extends MainRepository<Cart> {
     public void deleteProductFromCart(UUID cartId, Product product) {
         System.out.println("tooo");
         Cart cart = getCartById(cartId);
+
         List<Product> products = cart.getProducts();
 
         if (products == null || products.isEmpty()) {
