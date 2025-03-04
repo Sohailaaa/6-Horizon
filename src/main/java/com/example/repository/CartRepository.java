@@ -78,20 +78,27 @@ public class CartRepository extends MainRepository<Cart> {
 
     // Delete Product from Cart
     public void deleteProductFromCart(UUID cartId, Product product) {
-        Cart cart = getCartById(cartId);
-        List<Product> products = cart.getProducts();
-
-        if (products == null || products.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart is empty");
+        ArrayList<Cart> carts = getCarts();
+        Cart updated = null;
+        for (Cart cart : carts) {
+            if (cart.getId().equals(cartId)) {
+                updated = cart;
+                break;
+            }
         }
-
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId().equals(product.getId())) {
-                products.remove(i);
-                save(cart);
+        if (updated == null) {
+            throw new RuntimeException("Cart not found");
+        }
+        carts.remove(updated);
+        for (Product p: updated.getProducts()) {
+            if (p.getId().equals(product.getId())) {
+                updated.getProducts().remove(p);
+                carts.add(updated);
+                saveAll(carts);
                 return;
             }
         }
+
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart");
     }
 
