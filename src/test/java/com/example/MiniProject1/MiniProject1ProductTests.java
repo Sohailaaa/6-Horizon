@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -138,5 +140,157 @@ public class MiniProject1ProductTests {
             productService.getProductById(null);
         }, "Should throw IllegalArgumentException when product ID is null");
     }
+
+
+
+
+
+
+    //
+
+    @Test
+    public void updateProduct_withValidId_shouldUpdateSuccessfully() {
+        // Arrange
+        Product product = new Product(UUID.randomUUID(), "OldName", 30.0);
+        productRepository.addProduct(product);
+
+        // Act
+        Product updatedProduct = productService.updateProduct(product.getId(), "NewName", 50.0);
+
+        // Assert
+        assertNotNull(updatedProduct);
+        assertEquals("NewName", updatedProduct.getName());
+        assertEquals(50.0, updatedProduct.getPrice());
+    }
+
+    @Test
+    public void updateProduct_withInvalidId_shouldThrowException() {
+        // Arrange
+        UUID invalidId = UUID.randomUUID();
+
+        // Act & Assert
+        assertThrows(ResponseStatusException.class, () -> productService.updateProduct(invalidId, "UpdatedName", 40.0),
+                "Should throw ResponseStatusException when product ID is invalid");
+    }
+
+    @Test
+    public void updateProduct_withNullId_shouldThrowException() {
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> productService.updateProduct(null,
+                        "UpdatedName", 40.0),
+                "Should throw IllegalArgumentException when product ID is null");
+    }
+
+
+
+
+    //
+
+
+
+    @Test
+    public void applyDiscount_withValidProducts_shouldApplyDiscount() {
+        // Arrange
+        Product product1 = new Product(UUID.randomUUID(), "Product1", 100.0);
+        Product product2 = new Product(UUID.randomUUID(), "Product2", 200.0);
+        productRepository.addProduct(product1);
+        productRepository.addProduct(product2);
+
+        ArrayList<UUID> productIds = new ArrayList<>();
+        productIds.add(product1.getId());
+        productIds.add(product2.getId());
+
+        // Act
+        productService.applyDiscount(10.0, productIds);
+
+        // Assert
+        assertEquals(90.0, productService.getProductById(product1.getId()).getPrice());
+        assertEquals(180.0, productService.getProductById(product2.getId()).getPrice());
+    }
+
+    @Test
+    public void applyDiscount_withInvalidProductIds_shouldIgnoreThem() {
+        // Arrange
+        Product product = new Product(UUID.randomUUID(), "Product", 100.0);
+        productRepository.addProduct(product);
+
+        ArrayList<UUID> productIds = new ArrayList<>();
+        productIds.add(product.getId());
+        productIds.add(UUID.randomUUID()); // Invalid product ID
+
+        // Act
+        productService.applyDiscount(10.0, productIds);
+
+        // Assert
+        assertEquals(90.0, productService.getProductById(product.getId()).getPrice());
+    }
+
+    @Test
+    public void applyDiscount_withHighDiscount_shouldNotSetPriceBelowZero() {
+        // Arrange
+        Product product = new Product(UUID.randomUUID(), "Expensive Product", 50.0);
+        productRepository.addProduct(product);
+
+        ArrayList<UUID> productIds = new ArrayList<>();
+        productIds.add(product.getId());
+
+        // Act
+        productService.applyDiscount(110.0, productIds); // Trying to apply 110% discount, should cap at 100%
+
+        // Assert
+        Product updatedProduct = productRepository.getProductById(product.getId());
+        assertNotNull(updatedProduct, "Product should exist in the repository");
+        assertEquals(0.0, updatedProduct.getPrice(), "Price should be 0 when discount is too high");
+    }
+
+
+
+
+
+    @Test
+    public void deleteProductById_withValidId_shouldDeleteSuccessfully() {
+        // Arrange
+        Product product = new Product(UUID.randomUUID(), "TestProduct", 50.0);
+        productRepository.addProduct(product);
+
+        // Act
+        productService.deleteProductById(product.getId());
+
+        // Assert
+        assertNull(productService.getProductById(product.getId()));
+    }
+
+    @Test
+    public void deleteProductById_withInvalidId_shouldThrowException() {
+        // Arrange
+        UUID invalidId = UUID.randomUUID();
+
+        // Act & Assert
+        assertThrows(ResponseStatusException.class, () -> productService.deleteProductById(invalidId),
+                "Should throw ResponseStatusException when product ID is invalid");
+    }
+
+    @Test
+    public void deleteProductById_withNullId_shouldThrowException() {
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> productService.deleteProductById(null),
+                "Should throw IllegalArgumentException when product ID is null");
+    }
+
+    @Test
+    public void deleteProductById_whenProductListIsEmpty_shouldThrowException() {
+        // Arrange
+        UUID invalidProductId = UUID.randomUUID(); // Generate a random ID
+
+        // Act & Assert
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class,
+                () -> productService.deleteProductById(invalidProductId));
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode(),
+                "Deleting a product from an empty list should return 404 NOT FOUND");
+        assertEquals("Product not found", exception.getReason(),
+                "Exception message should indicate that the product was not found");
+    }
+
 }
 

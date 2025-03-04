@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.example.MiniProject1.MiniProject1UserTests" time="0.346" tests="25" errors="2" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="23"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects\target\test-classes;C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects\target\classes;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\3.4.2\spring-boot-starter-data-rest-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-rest-webmvc\4.4.2\spring-data-rest-webmvc-4.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-rest-core\4.4.2\spring-data-rest-core-4.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-tx\6.2.2\spring-tx-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\hateoas\spring-hateoas\2.4.1\spring-hateoas-2.4.1.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-commons\3.4.2\spring-data-commons-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\plugin\spring-plugin-core\3.0.0\spring-plugin-core-3.0.0.jar;C:\Users\goga3\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\goga3\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.2\spring-boot-starter-web-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.2\spring-boot-starter-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.2\spring-boot-starter-logging-3.4.2.jar;C:\Users\goga3\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\goga3\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\goga3\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\goga3\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\goga3\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\goga3\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\goga3\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.2\spring-boot-starter-json-3.4.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.2\spring-boot-starter-tomcat-3.4.2.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.34\tomcat-embed-core-10.1.34.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.34\tomcat-embed-el-10.1.34.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.34\tomcat-embed-websocket-10.1.34.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-web\6.2.2\spring-web-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-beans\6.2.2\spring-beans-6.2.2.jar;C:\Users\goga3\.m2\repository\io\micrometer\micrometer-observation\1.14.3\micrometer-observation-1.14.3.jar;C:\Users\goga3\.m2\repository\io\micrometer\micrometer-commons\1.14.3\micrometer-commons-1.14.3.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-webmvc\6.2.2\spring-webmvc-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-aop\6.2.2\spring-aop-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-context\6.2.2\spring-context-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-expression\6.2.2\spring-expression-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-devtools\3.4.2\spring-boot-devtools-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.2\spring-boot-autoconfigure-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.2\spring-boot-starter-test-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-test\3.4.2\spring-boot-test-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.2\spring-boot-test-autoconfigure-3.4.2.jar;C:\Users\goga3\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\goga3\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\goga3\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\goga3\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\goga3\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\goga3\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\goga3\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\goga3\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\goga3\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\goga3\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\goga3\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\goga3\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\goga3\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\goga3\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\goga3\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\goga3\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\goga3\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\goga3\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\goga3\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-core\6.2.2\spring-core-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-jcl\6.2.2\spring-jcl-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-test\6.2.2\spring-test-6.2.2.jar;C:\Users\goga3\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\goga3\.m2\repository\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;C:\Users\goga3\.m2\repository\org\projectlombok\lombok-mapstruct-binding\0.2.0\lombok-mapstruct-binding-0.2.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Africa/Cairo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="23"/>
+    <property name="APPLICATION_NAME" value="MiniProject1"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
+    <property name="sun.java.command" value="C:\Users\goga3\AppData\Local\Temp\surefire14843692068870185439\surefirebooter-20250304204415251_3.jar C:\Users\goga3\AppData\Local\Temp\surefire14843692068870185439 2025-03-04T20-44-15_129-jvmRun1 surefire-20250304204415251_1tmp surefire_0-20250304204415251_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects\target\test-classes;C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects\target\classes;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\3.4.2\spring-boot-starter-data-rest-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-rest-webmvc\4.4.2\spring-data-rest-webmvc-4.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-rest-core\4.4.2\spring-data-rest-core-4.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-tx\6.2.2\spring-tx-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\hateoas\spring-hateoas\2.4.1\spring-hateoas-2.4.1.jar;C:\Users\goga3\.m2\repository\org\springframework\data\spring-data-commons\3.4.2\spring-data-commons-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\plugin\spring-plugin-core\3.0.0\spring-plugin-core-3.0.0.jar;C:\Users\goga3\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\goga3\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.2\spring-boot-starter-web-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.2\spring-boot-starter-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.2\spring-boot-starter-logging-3.4.2.jar;C:\Users\goga3\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\goga3\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\goga3\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\goga3\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\goga3\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\goga3\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\goga3\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.2\spring-boot-starter-json-3.4.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.2\spring-boot-starter-tomcat-3.4.2.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.34\tomcat-embed-core-10.1.34.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.34\tomcat-embed-el-10.1.34.jar;C:\Users\goga3\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.34\tomcat-embed-websocket-10.1.34.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-web\6.2.2\spring-web-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-beans\6.2.2\spring-beans-6.2.2.jar;C:\Users\goga3\.m2\repository\io\micrometer\micrometer-observation\1.14.3\micrometer-observation-1.14.3.jar;C:\Users\goga3\.m2\repository\io\micrometer\micrometer-commons\1.14.3\micrometer-commons-1.14.3.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-webmvc\6.2.2\spring-webmvc-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-aop\6.2.2\spring-aop-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-context\6.2.2\spring-context-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-expression\6.2.2\spring-expression-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-devtools\3.4.2\spring-boot-devtools-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.2\spring-boot-autoconfigure-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.2\spring-boot-starter-test-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-test\3.4.2\spring-boot-test-3.4.2.jar;C:\Users\goga3\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.2\spring-boot-test-autoconfigure-3.4.2.jar;C:\Users\goga3\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\goga3\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\goga3\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\goga3\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\goga3\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\goga3\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\goga3\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\goga3\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\goga3\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\goga3\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\goga3\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\goga3\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\goga3\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\goga3\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\goga3\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\goga3\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\goga3\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\goga3\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\goga3\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\goga3\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-core\6.2.2\spring-core-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-jcl\6.2.2\spring-jcl-6.2.2.jar;C:\Users\goga3\.m2\repository\org\springframework\spring-test\6.2.2\spring-test-6.2.2.jar;C:\Users\goga3\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\goga3\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\goga3\.m2\repository\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;C:\Users\goga3\.m2\repository\org\projectlombok\lombok-mapstruct-binding\0.2.0\lombok-mapstruct-binding-0.2.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\goga3"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-01-21"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-23"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\goga3\AppData\Local\Temp\surefire14843692068870185439\surefirebooter-20250304204415251_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="23.0.2+7-58"/>
+    <property name="user.name" value="goga3"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\goga3\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\goga3\AppData\Local\Temp\"/>
+    <property name="java.version" value="23.0.2"/>
+    <property name="user.dir" value="C:\Users\goga3\OneDrive\Documents\Java-Spring-Boot-projects"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="28592"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python312\Scripts\;C:\Python312\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\HP\HP One Agent;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\CMake\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Java\jdk-23\bin;C:\Users\goga3\Downloads\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin;C:\Users\goga3\AppData\Local\Programs\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Users\goga3\AppData\Local\Microsoft\WindowsApps;C:\Users\goga3\AppData\Local\GitHubDesktop\bin;C:\Users\goga3\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\goga3\AppData\Roaming\npm;C:\intelFPGA\18.1\modelsim_ase\win32aloem;C:\intelFPGA_lite\22.1std\questa_fse\win64;C:\Program Files\swipl\bin;C:\Program Files\Java\jdk-23\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="23.0.2+7-58"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="67.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[MiniProject1] "/>
+  </properties>
+  <testcase name="testEmptyCart_CartExistsWithNoProducts_ShouldDoNothing" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.018">
+    <system-out><![CDATA[2025-03-04T20:44:21.644+02:00  INFO 28592 --- [MiniProject1] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.MiniProject1.MiniProject1UserTests]: MiniProject1UserTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-03-04T20:44:21.646+02:00  INFO 28592 --- [MiniProject1] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.MiniProject1.MiniProject1Application for test class com.example.MiniProject1.MiniProject1UserTests
+saved userUser(id=d2c003e7-e8da-425e-aa6a-b26ccb1cd51c, name=TestUser, orders=[])doool
+cart is Empty
+]]></system-out>
+  </testcase>
+  <testcase name="testGetUsers_NoUsers_ShouldReturnEmptyList" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.004"/>
+  <testcase name="testAddOrderToUser_Success" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.019">
+    <system-out><![CDATA[saved userUser(id=9540024e-edd7-40ac-be12-1e2ab26a75b4, name=Test User, orders=[]) orderOrder(id=4f90344f-f764-4989-9061-dfd59236d57f, userId=9540024e-edd7-40ac-be12-1e2ab26a75b4, totalPrice=10.0, products=[Product(id=53f41908-599c-4ac2-bd38-d92c5fe2abd7, name=Test Product, price=10.0)])
+doool
+tooo
+saved order1
+]]></system-out>
+  </testcase>
+  <testcase name="testGetOrdersByUserId_UserNotFound_ShouldThrowRuntimeException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.015"/>
+  <testcase name="testEmptyCart_CartExistsWithProducts_ShouldRemoveProducts" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.02">
+    <system-out><![CDATA[saved userUser(id=6ca9da53-3f07-4192-8a4d-5a56d7f7b47e, name=TestUser, orders=[])doool
+tooo
+tooo
+]]></system-out>
+  </testcase>
+  <testcase name="testAddUser_ExistingUser_ShouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.008">
+    <system-out><![CDATA[Exception caught: User already exists
+]]></system-out>
+  </testcase>
+  <testcase name="deleteUserById_whenUserListIsEmpty_shouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.011"/>
+  <testcase name="testGetUserById_UserNotFound_ShouldThrowRuntimeException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.009"/>
+  <testcase name="testGetUsers_WithUsers_ShouldReturnListOfUsers" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.011">
+    <system-out><![CDATA[saved userUser(id=e1f4bd02-9099-4b6d-9816-0431e60d2946, name=Alice, orders=[Order(id=f0c27621-5454-4eb3-a8ed-0eba2b6db2c1, userId=f06938b5-bf2b-4e24-92c7-f9745445e587, totalPrice=20.0, products=[Product(id=d6bdcf4d-9161-4834-96d1-8554cff69ce5, name=Product A, price=10.0)])])saved userUser(id=e1f4bd02-9099-4b6d-9816-0431e60d2946, name=Alice, orders=[Order(id=f0c27621-5454-4eb3-a8ed-0eba2b6db2c1, userId=f06938b5-bf2b-4e24-92c7-f9745445e587, totalPrice=20.0, products=[Product(id=d6bdcf4d-9161-4834-96d1-8554cff69ce5, name=Product A, price=10.0)])])saved userUser(id=eeaea004-f684-4a42-ba3e-e901b98c9b5e, name=Bob, orders=[Order(id=2163b3ed-e173-4b75-911d-3f1265c64a08, userId=6ff0164e-e48d-41b7-a783-c073878166f1, totalPrice=30.0, products=[Product(id=baf73355-85be-4e19-9054-dbe359f572ed, name=Product B, price=15.0)])])]]></system-out>
+  </testcase>
+  <testcase name="testGetOrdersByUserId_NullUserId_ShouldThrowIllegalArgumentException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006"/>
+  <testcase name="deleteUserById_withInvalidId_shouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.007"/>
+  <testcase name="testGetUsers_ExceptionThrown_ShouldReturnEmptyList" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006"/>
+  <testcase name="testAddUser_NullUser_ShouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.004">
+    <system-out><![CDATA[Exception caught: User cannot be null
+]]></system-out>
+  </testcase>
+  <testcase name="deleteUserById_withValidId_shouldDeleteUser" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.009"/>
+  <testcase name="testGetOrdersByUserId_UserExistsWithOrders_ShouldReturnOrders" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.007">
+    <system-out><![CDATA[saved userUser(id=a8222238-520c-4d5c-890c-829a68df5957, name=Test User, orders=[Order(id=213d2c12-539c-4b35-897b-260831f35b8e, userId=a8222238-520c-4d5c-890c-829a68df5957, totalPrice=100.0, products=[])])]]></system-out>
+  </testcase>
+  <testcase name="testGetOrdersByUserId_UserExistsWithEmptyOrderList_ShouldReturnEmptyList" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006">
+    <system-out><![CDATA[saved userUser(id=39b61297-82bf-45dd-b0c8-de05502f5b52, name=Test User, orders=[])]]></system-out>
+  </testcase>
+  <testcase name="removeOrderFromUser_withInvalidUser_shouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.004"/>
+  <testcase name="removeOrderFromUser_withValidUserAndSingleOrder_ShouldRemoveOrderSuccessfully" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.009">
+    <error message="404 NOT_FOUND &quot;Cart not found&quot;" type="org.springframework.web.server.ResponseStatusException"><![CDATA[org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Cart not found"
+	at com.example.repository.CartRepository.getCartByUserId(CartRepository.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.example.repository.CartRepository$$SpringCGLIB$$0.getCartByUserId(<generated>)
+	at com.example.repository.UserRepository.emptyCart(UserRepository.java:107)
+	at com.example.repository.UserRepository.addOrderToUser(UserRepository.java:98)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.example.repository.UserRepository$$SpringCGLIB$$0.addOrderToUser(<generated>)
+	at com.example.MiniProject1.MiniProject1UserTests.removeOrderFromUser_withValidUserAndSingleOrder_ShouldRemoveOrderSuccessfully(MiniProject1UserTests.java:247)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></error>
+    <system-out><![CDATA[saved userUser(id=2bae6bcd-0a62-42f1-891d-6f4f3152ff75, name=TestUser, orders=[]) orderOrder(id=150f9a75-4004-4ab7-a1f3-cdba979ad29f, userId=2bae6bcd-0a62-42f1-891d-6f4f3152ff75, totalPrice=100.0, products=[])
+doool
+]]></system-out>
+  </testcase>
+  <testcase name="removeOrderFromUser_withInvalidOrder_ShouldThrowException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.01">
+    <error message="404 NOT_FOUND &quot;Cart not found&quot;" type="org.springframework.web.server.ResponseStatusException"><![CDATA[org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Cart not found"
+	at com.example.repository.CartRepository.getCartByUserId(CartRepository.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.example.repository.CartRepository$$SpringCGLIB$$0.getCartByUserId(<generated>)
+	at com.example.repository.UserRepository.emptyCart(UserRepository.java:107)
+	at com.example.repository.UserRepository.addOrderToUser(UserRepository.java:98)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at com.example.repository.UserRepository$$SpringCGLIB$$0.addOrderToUser(<generated>)
+	at com.example.MiniProject1.MiniProject1UserTests.removeOrderFromUser_withInvalidOrder_ShouldThrowException(MiniProject1UserTests.java:262)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></error>
+    <system-out><![CDATA[saved userUser(id=6aac5a62-9a24-420b-9ee9-18648c093da5, name=TestUser, orders=[]) orderOrder(id=2265374e-1b1d-4be4-b7a4-912e45b362af, userId=6aac5a62-9a24-420b-9ee9-18648c093da5, totalPrice=100.0, products=[])
+doool
+]]></system-out>
+  </testcase>
+  <testcase name="testAddUser_NewUser_ShouldBeSavedSuccessfully" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006">
+    <system-out><![CDATA[saved userUser(id=b73e6305-a2c6-4301-b372-ed85472c7cdd, name=Jane Doe, orders=[])User added successfully: User(id=b73e6305-a2c6-4301-b372-ed85472c7cdd, name=Jane Doe, orders=[])
+]]></system-out>
+  </testcase>
+  <testcase name="testGetUserById_ValidId_ShouldReturnUser" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006">
+    <system-out><![CDATA[saved userUser(id=beafe01d-e971-4d30-b01f-58bce053ccbc, name=Alice, orders=[Order(id=9919c9fa-75cc-4206-a6b0-e74be7abf946, userId=beafe01d-e971-4d30-b01f-58bce053ccbc, totalPrice=50.0, products=[])])]]></system-out>
+  </testcase>
+  <testcase name="testAddOrderToUser_UserNotFound" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.005"/>
+  <testcase name="testEmptyCart_CartDoesNotExist_ShouldThrowNotFound" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.008">
+    <system-out><![CDATA[saved userUser(id=a7658552-c423-4cd8-a200-b1bfa930a4e6, name=TestUser, orders=[])doool
+]]></system-out>
+  </testcase>
+  <testcase name="testAddOrderToUser_CartEmpty" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.006">
+    <system-out><![CDATA[saved userUser(id=7593b539-89bd-46c5-ba85-03872e89411c, name=Test User, orders=[])]]></system-out>
+  </testcase>
+  <testcase name="testGetUserById_NullUserId_ShouldThrowIllegalArgumentException" classname="com.example.MiniProject1.MiniProject1UserTests" time="0.003"/>
+</testsuite>
