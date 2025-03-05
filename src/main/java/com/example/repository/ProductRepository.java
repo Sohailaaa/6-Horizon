@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.model.Cart;
 import com.example.model.Product;
 import com.example.model.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,10 +15,12 @@ import java.util.UUID;
 @Repository
 @SuppressWarnings("rawtypes")
 public class ProductRepository extends MainRepository<Product> {
+    @Value("${spring.application.productDataPath}")
+    private String productDataPath;
+
     @Override
     protected String getDataPath() {
-        return "src/main/java/com/example/data/products.json";
-
+        return productDataPath;
     }
 
     @Override
