@@ -73,7 +73,8 @@ public class CartRepository extends MainRepository<Cart> {
             }
         }
         if (updated == null) {
-            throw new RuntimeException("Cart not found");
+//            throw new IllegalArgumentException("Cart not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart not found");
         }
         carts.remove(updated);
         updated.getProducts().add(product);
