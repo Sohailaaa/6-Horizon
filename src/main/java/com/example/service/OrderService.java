@@ -21,23 +21,43 @@ public class OrderService extends MainService<Order> {
     }
 
     public void addOrder(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
+        if (order.getTotalPrice() < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
         orderRepository.addOrder(order);
     }
 
     public ArrayList<Order> getOrders() {
-        return orderRepository.getOrders();
+        try {
+            return orderRepository.getOrders();
+        } catch (Exception e) {
+            throw new RuntimeException("Could not retrieve orders");
+        }
     }
 
     public Order getOrderById(UUID orderId) {
-        return orderRepository.getOrderById(orderId)   ;
+        if (orderId == null) {
+            throw new IllegalArgumentException("Order ID cannot be null");
+        }
+        Order order = orderRepository.getOrderById(orderId);
+        if (order == null) {
+            throw new IllegalArgumentException("Order not found");
+        }
+        return order;
     }
 
     public void deleteOrderById(UUID orderId) throws IllegalArgumentException {
-        Order order = orderRepository.getOrderById(orderId);
-        if(order == null){
-            throw new IllegalArgumentException("Order not found");
-        }else {
-            orderRepository.deleteOrderById(orderId);
+        if (orderId == null) {
+            throw new IllegalArgumentException("Order ID cannot be null");
         }
+        Order order = orderRepository.getOrderById(orderId);
+        if (order == null) {
+            throw new NullPointerException("Order cannot be null");
+        }
+
+        orderRepository.deleteOrderById(orderId);
     }
 }
