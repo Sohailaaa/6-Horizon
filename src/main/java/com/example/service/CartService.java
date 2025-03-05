@@ -47,6 +47,7 @@ public class CartService extends MainService<Cart> {
         if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null");
         }
+
         Cart cart = cartRepository.getCartByUserId(userId);
         if (cart == null) {
             throw new RuntimeException("Cart not found");
@@ -55,6 +56,7 @@ public class CartService extends MainService<Cart> {
     }
 
     public void addProductToCart(UUID cartId, Product product) {
+        System.out.print("Adding product " + product.getName() + " to " + cartId);
         if (cartId == null) {
             throw new IllegalArgumentException("Cart ID cannot be null");
         }
@@ -65,6 +67,7 @@ public class CartService extends MainService<Cart> {
     }
 
     public void deleteProductFromCart(UUID cartId, Product product) {
+        System.out.print("hhhh");
         if (cartId == null) {
             throw new IllegalArgumentException("Cart ID cannot be null");
         }

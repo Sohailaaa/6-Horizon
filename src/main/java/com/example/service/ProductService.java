@@ -44,7 +44,9 @@ public class ProductService extends MainService<Product> {
 
     public Product updateProduct(UUID productId, String newName, double newPrice) {
         ArrayList<Product> products = getProducts();
-
+        if (productId == null) {
+            throw new IllegalArgumentException("Product ID cannot be null");
+        }
         Product productToUpdate = products.stream()
                 .filter(product -> product.getId().equals(productId))
                 .findFirst()
@@ -58,24 +60,34 @@ public class ProductService extends MainService<Product> {
     }
 
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
-        if (discount < 0 || discount > 100 || productIds == null || productIds.isEmpty()) {
+        if (discount < 0 || productIds == null || productIds.isEmpty()) {
             throw new IllegalArgumentException("Invalid discount or product list");
+        }
+
+        // Cap the discount at 100%
+        if (discount > 100) {
+            discount = 100;
         }
 
         ArrayList<Product> products = productRepository.getProducts();
         boolean updated = false;
+
         for (Product product : products) {
             if (productIds.contains(product.getId())) {
                 double newPrice = product.getPrice() * (1 - discount / 100);
+                newPrice = Math.max(newPrice, 0);
                 product.setPrice(newPrice);
                 updated = true;
             }
         }
+
         if (!updated) {
             throw new IllegalArgumentException("No matching products found for discount");
         }
+
         productRepository.overrideData(products);
     }
+
 
     public void deleteProductById(UUID productId) {
         if (productId == null) {

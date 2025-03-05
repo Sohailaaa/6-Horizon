@@ -11,6 +11,7 @@ import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public User addUser(@RequestBody User user)  throws DuplicateUserException ,NullPointerException {
+    public User addUser(@RequestBody User user) throws DuplicateUserException, NullPointerException {
         return userService.addUser(user);
     }
 
@@ -53,8 +54,8 @@ public class UserController {
 
     @PostMapping("/{userId}/checkout")
     public String addOrderToUser(@PathVariable UUID userId) {
-       userService.addOrderToUser(userId);
-       return "Order added successfully";
+        userService.addOrderToUser(userId);
+        return "Order added successfully";
 
     }
 
@@ -67,35 +68,67 @@ public class UserController {
     @DeleteMapping("/{userId}/emptyCart")
     public String emptyCart(@PathVariable UUID userId) {
 
-            userService.emptyCart(userId);
-            return "Cart emptied successfully";
+        userService.emptyCart(userId);
+        return "Cart emptied successfully";
 
     }
 
     @PutMapping("/addProductToCart")
     public String addProductToCart(@RequestParam UUID userId, @RequestParam UUID productId) {
+//        Product product = productService.getProductById(productId);
+//        Cart cart = cartService.getCartByUserId(userId);
+//        UUID cartId = cart.getId();
+//        cartService.addProductToCart(cartId, product);
+        Cart cart;
+
+        try {
+            cart = cartService.getCartByUserId(userId);
+        } catch (ResponseStatusException e) {
+            cart = new Cart(userId, new ArrayList<Product>());
+            cartService.addCart(cart);
+        }
         Product product = productService.getProductById(productId);
-        Cart cart = cartService.getCartByUserId(userId);
-        UUID cartId = cart.getId();
-        cartService.addProductToCart(cartId, product);
+        if (cart == null) {
+            return "Cart is empty";
+        }
+        if (product == null) {
+            return "Product does not exist";
+        }
+
+        cartService.addProductToCart(cart.getId(), product);
         return "Product added to cart";
     }
 
     @PutMapping("/deleteProductFromCart")
     public String deleteProductFromCart(@RequestParam UUID userId, @RequestParam UUID productId) {
+//        Product product = productService.getProductById(productId);
+//        Cart cart = cartService.getCartByUserId(userId);
+//        UUID cartId = cart.getId();
+//        cartService.deleteProductFromCart(cartId, product);
+        UUID cartId;
+        try {
+            cartId = cartService.getCartByUserId(userId).getId();
+        } catch (ResponseStatusException e) {
+            return "Cart is empty";
+        }
+        if (cartService.getCartByUserId(userId).getProducts().isEmpty()) {
+            return "Cart is empty";
+
+        }
+        if (productService.getProductById(productId) == null) {
+            return "Product does not exist";
+        }
         Product product = productService.getProductById(productId);
-        Cart cart = cartService.getCartByUserId(userId);
-        UUID cartId = cart.getId();
         cartService.deleteProductFromCart(cartId, product);
         return "Product deleted from cart";
     }
 
     @DeleteMapping("/delete/{userId}")
     public String deleteUserById(@PathVariable UUID userId) {
-        try{
+        try {
             userService.deleteUserById(userId);
             return "User deleted successfully";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "User not found";
         }
     }

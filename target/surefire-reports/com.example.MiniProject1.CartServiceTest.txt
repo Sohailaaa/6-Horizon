@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.example.MiniProject1.CartServiceTest
 -------------------------------------------------------------------------------
-Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.483 s -- in com.example.MiniProject1.CartServiceTest
+Tests run: 21, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.326 s <<< FAILURE! -- in com.example.MiniProject1.CartServiceTest
+com.example.MiniProject1.CartServiceTest.addProductToCart_ShouldThrowException_WhenProductIsNull -- Time elapsed: 0.015 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was: <java.lang.NullPointerException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at com.example.MiniProject1.CartServiceTest.addProductToCart_ShouldThrowException_WhenProductIsNull(MiniProject1CartTests.java:177)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+Caused by: java.lang.NullPointerException: Cannot invoke "com.example.model.Product.getName()" because "product" is null
+	at com.example.service.CartService.addProductToCart(CartService.java:59)
+	at com.example.MiniProject1.CartServiceTest.lambda$addProductToCart_ShouldThrowException_WhenProductIsNull$6(MiniProject1CartTests.java:177)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+

@@ -62,8 +62,9 @@ public class UserService extends MainService<User> {
     }
 
     public void addOrderToUser(UUID userId) {
+        getUserById(userId);
         Cart cart = cartRepository.getCartByUserId(userId);
-        if (cart == null) {
+        if (cart == null || cart.getProducts().isEmpty()) {
             return;
         }
         List<Product> products = cart.getProducts();

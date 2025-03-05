@@ -86,9 +86,8 @@ public class UserRepository extends MainRepository<User> {
 
     public void addOrderToUser(UUID userId, Order order) {
         User user = getUserById(userId);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
+
+
         if (user.getOrders() == null) {
             user.setOrders(new ArrayList<>());
         }
@@ -97,24 +96,28 @@ public class UserRepository extends MainRepository<User> {
         orderRepository.addOrder(order);
 
         emptyCart(userId);
-       // save(user);
         override(user);
         System.out.println("saved order"+getOrdersByUserId(userId).size());
 
     }
 
     public void emptyCart(UUID userId) {
+        System.out.println("doool");
+
         Cart cart = cartRepository.getCartByUserId(userId);
-        if (cart == null) {
+        if (cart == null ) {
+            System.out.println("cart is null");
             return;
         }
 
         List<Product> products = cart.getProducts();
-        if (products == null) {
+        if (products == null || products.isEmpty()) {
+            System.out.println("cart is Empty");
             return; // Nothing to remove
         }
 
         for (Product product : products) {
+
             cartRepository.deleteProductFromCart(cart.getId(), product);
         }
     }
