@@ -9,5 +9,5 @@ ENV spring.application.productDataPath="/app/config/products.json"
 ENV spring.application.orderDataPath="/app/config/orders.json"
 ENV spring.application.cartDataPath="/app/config/carts.json"
 
-EXPOSE 8080
+EXPOSE 8085
 CMD ["java","-jar","/app/target/mini1.jar"]
