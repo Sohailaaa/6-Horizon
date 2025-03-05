@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,13 @@ import java.util.UUID;
 @SuppressWarnings("rawtypes")
 public class UserRepository extends MainRepository<User> {
     private final CartRepository cartRepository;
+    @Value("${spring.application.userDataPath}")
+    private String userDataPath;
 
     @Override
     protected String getDataPath() {
-        return "src/main/java/com/example/data/users.json";
+        return userDataPath;
     }
-
     @Override
     protected Class<User[]> getArrayType() {
         return User[].class;
