@@ -75,10 +75,6 @@ public class UserController {
 
     @PutMapping("/addProductToCart")
     public String addProductToCart(@RequestParam UUID userId, @RequestParam UUID productId) {
-//        Product product = productService.getProductById(productId);
-//        Cart cart = cartService.getCartByUserId(userId);
-//        UUID cartId = cart.getId();
-//        cartService.addProductToCart(cartId, product);
         Cart cart;
 
         try {
@@ -101,10 +97,7 @@ public class UserController {
 
     @PutMapping("/deleteProductFromCart")
     public String deleteProductFromCart(@RequestParam UUID userId, @RequestParam UUID productId) {
-//        Product product = productService.getProductById(productId);
-//        Cart cart = cartService.getCartByUserId(userId);
-//        UUID cartId = cart.getId();
-//        cartService.deleteProductFromCart(cartId, product);
+
         UUID cartId;
         try {
             cartId = cartService.getCartByUserId(userId).getId();
